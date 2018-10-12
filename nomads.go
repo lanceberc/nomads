@@ -4,6 +4,7 @@ import "os"
 import "os/user"
 import "os/exec"
 import "syscall"
+
 // import "path/filepath"
 import "time"
 import "io"
@@ -132,7 +133,7 @@ var zones = map[string]Zone{
 		latitude:    Latitude{40, 38},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
 		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND"},
-//		modelVars:   []string{"GUST", "TMP", "UGRD", "VGRD", "WIND"},
+		//		modelVars:   []string{"GUST", "TMP", "UGRD", "VGRD", "WIND"},
 	},
 	"pacific": Zone{
 		description: "North Pacific Wind/Precip (10 day GFS)",
@@ -217,7 +218,7 @@ var models = map[string]Model{
 		fn:                "hrrr",
 		modelFrequency:    "1h",  // hrrr runs every hour
 		forecastFrequency: "1h",  // forecasts are one hour apart
-		horizon:           "18h",  // hrrr is 18 hour forecast; for the 4 times a day it's longer use hrrr36
+		horizon:           "18h", // hrrr is 18 hour forecast; for the 4 times a day it's longer use hrrr36
 		start:             "50m", // hrrr f00 50 minutes after the hour
 		end:               "85m", // f18 a bit more than 1/2 hour later
 		baseurl:           "http://nomads.ncep.noaa.gov/cgi-bin/filter_hrrr_2d.pl?file=%s%s%s&subregion=&leftlon=%5.2f&rightlon=%5.2f&toplat=%5.2f&bottomlat=%5.2f&dir=%%2Fhrrr.%04d%02d%02d%%2Fconus",
@@ -316,6 +317,10 @@ func fetch() {
 	now := nowMonotonic.Round(0)
 	utc := now.UTC()
 
+	if Z.geo == "sf96" {
+		M.horizon = "96h" // Adjust GFS (default 384) for shorter horizon - should change M.endLag, too
+	}
+
 	startLag, _ := time.ParseDuration(M.start)
 	endLag, _ := time.ParseDuration(M.end)
 	modelFrequency, _ := time.ParseDuration(M.modelFrequency)
@@ -412,7 +417,7 @@ func fetch() {
 		}
 
 		// GFS has one directory per day, others one directory per model run
-		if Z.model == "gfs" {
+		if (Z.model == "gfs") || (Z.model == "gfs_hourly") {
 			url = fmt.Sprintf(M.baseurl, urlfn, levels, vars, Z.longitude.west, Z.longitude.east, Z.latitude.north, Z.latitude.south, zulu.Year(), int(zulu.Month()), zulu.Day(), zulu.Hour())
 		} else {
 			url = fmt.Sprintf(M.baseurl, urlfn, levels, vars, Z.longitude.west, Z.longitude.east, Z.latitude.north, Z.latitude.south, zulu.Year(), int(zulu.Month()), zulu.Day())
@@ -542,7 +547,7 @@ func fetch() {
 			_ = f.Close()
 		}
 		_ = out.Close()
-		if !keep  && (badGribCount == 0) {
+		if !keep && (badGribCount == 0) {
 			// Delete the individual forecasts if this was a complete fetch
 			if verbose {
 				fmt.Printf("Cleaning up: %s\n", runDir)
@@ -604,9 +609,6 @@ func main() {
 	if !ok {
 		fmt.Fprintf(os.Stderr, "Zone %s has no associated model '%s'\n", zone, Z.model)
 		os.Exit(-1)
-	}
-	if Z.geo == "sf96" {
-		M.horizon = "96h" // Adjust GFS for shorter horizon
 	}
 	fetch()
 }
