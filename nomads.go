@@ -4,13 +4,12 @@ import "os"
 import "os/user"
 import "os/exec"
 import "syscall"
-
-// import "path/filepath"
 import "time"
 import "io"
 import "fmt"
 import "flag"
 import "log"
+import "sort"
 
 type Longitude struct{ west, east float64 }
 type Latitude struct{ north, south float64 }
@@ -180,6 +179,24 @@ var zones = map[string]Zone{
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
 		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND"},
 	},
+	"chessy": Zone{
+		description: "Annapolis Wind hi-res (18 hour hrrr)",
+		geo:         "chesapeake",
+		model:       "hrrr",
+		longitude:   Longitude{-77.0, -75.5},
+		latitude:    Latitude{39.75, 38.5},
+		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+	},
+	"newport": Zone{
+		description: "Newport Wind hi-res (18 hour hrrr)",
+		geo:         "newport",
+		model:       "hrrr",
+		longitude:   Longitude{-71.5, -71.0},
+		latitude:    Latitude{41.75, 41.25},
+		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+	},
 }
 
 type Model struct {
@@ -275,6 +292,31 @@ var verbose bool
 var Z Zone
 var M Model
 
+func prettyInt(i int64) (string) {
+	const (Kilo int64 = 1024
+		Mega = 1024 * Kilo
+		Giga = 1024 * Mega
+		Tera = 1024 * Giga
+		Peta = 1024 * Tera )
+	if (i > Peta) {
+		return(fmt.Sprintf("%.2fPiB", float64(i) / float64(Peta)))
+	}
+	if (i > Tera) {
+		return(fmt.Sprintf("%.2fTiB", float64(i) / float64(Tera)))
+	}
+	if (i > Giga) {
+		return(fmt.Sprintf("%.2fGiB", float64(i) / float64(Giga)))
+	}
+	if (i > Mega) {
+		return(fmt.Sprintf("%.2fMiB", float64(i) / float64(Mega)))
+	}
+	if (i > Kilo) {
+		return(fmt.Sprintf("%.2fKiB", float64(i) / float64(Kilo)))
+	}
+	return(fmt.Sprintf("%4dB", i))
+	
+}
+
 func fetchUrl(url, fn string) (exitCode int) {
 	if verbose {
 		fmt.Printf("%s %s %s %s\n", "curl", "-o", fn, url)
@@ -313,9 +355,9 @@ func fetch() {
 		vars = fmt.Sprintf("%s&var_%s=on", vars, s) // horribly inefficient
 	}
 
-	nowMonotonic := time.Now()
-	now := nowMonotonic.Round(0)
-	utc := now.UTC()
+	startMonotonic := time.Now()
+	start := startMonotonic.Round(0)
+	utc := start.UTC()
 
 	if Z.geo == "sf96" {
 		M.horizon = "96h" // Adjust GFS (default 384) for shorter horizon - should change M.endLag, too
@@ -402,6 +444,8 @@ func fetch() {
 
 	goodGribCount := 0
 	badGribCount := 0
+	skipGribCount := 0
+	
 	var gribs []string
 	badGribs := ""
 	for hours <= horizon {
@@ -434,6 +478,7 @@ func fetch() {
 		_, err := os.Stat(fn)
 		if err == nil {
 			fmt.Printf("Skip (exists) %s\n", urlfn)
+			skipGribCount++
 			gribs = append(gribs, fn)
 			hours += forecastFrequency
 			continue
@@ -504,7 +549,7 @@ func fetch() {
 		hours += forecastFrequency
 	}
 
-	fmt.Printf("Good GRIBS: %d Bad: %d\n", goodGribCount, badGribCount)
+	fmt.Printf("Good GRIBS: %d (%d fetched + %d previous) Bad: %d\n", goodGribCount + skipGribCount, goodGribCount, skipGribCount, badGribCount)
 	if badGribCount > 0 {
 		fmt.Printf("Could not fetch%s\n", badGribs)
 		fmt.Printf("Use --merge to fetch missing forecasts\n")
@@ -524,7 +569,6 @@ func fetch() {
 
 	if goodGribCount > 0 {
 		// Cat the fetched gribs together making a composite GRIB
-		fmt.Printf("GRIB %s\n", grb2)
 		out, err := os.Create(grb2)
 		if err != nil {
 			log.Fatal(err)
@@ -547,6 +591,8 @@ func fetch() {
 			_ = f.Close()
 		}
 		_ = out.Close()
+		st, _ := os.Stat(grb2)
+		fmt.Printf("GRIB %s %s (%d bytes)\n", grb2, prettyInt(st.Size()), st.Size())
 		if !keep && (badGribCount == 0) {
 			// Delete the individual forecasts if this was a complete fetch
 			if verbose {
@@ -557,17 +603,25 @@ func fetch() {
 	}
 
 	finish := time.Now()
-	elapsed := finish.Sub(now)
-	fmt.Printf("Fetch finished @ %02d:%02d, took %d:%02d:%02d\n", finish.Hour(), finish.Minute(), int(elapsed.Hours()), int(elapsed.Minutes()), int(elapsed.Seconds()))
+	elapsed := time.Since(start)
+	fmt.Printf("Fetch finished @ %02d:%02d, elapsed %d:%02d:%02d\n", finish.Hour(), finish.Minute(), int64(elapsed.Hours()), int64(elapsed.Minutes()) % 60, int64(elapsed.Seconds()) % 60)
 }
 
 func Usage() {
-	flag.Usage()
+	flag.Usage() // Print help for args and flags
+
+	// Print list of zones sorted alphabetically just for consistency
 	fmt.Fprintf(os.Stderr, "Where zone is one of:\n")
-	for id, zz := range zones {
-		fmt.Fprintf(os.Stderr, "%12s %v\n", id, zz.description)
+	var si[]string
+	for id, _ := range zones {
+		si = append(si, id)
 	}
-	os.Exit(-1)
+	sort.Strings(si)
+	for _, id := range si {
+		fmt.Fprintf(os.Stderr, "%12s %v\n", id, zones[id].description)
+	}
+	
+	os.Exit(1)
 }
 
 func args() {
