@@ -321,7 +321,8 @@ func fetchUrl(url, fn string) (exitCode int) {
 	if verbose {
 		fmt.Printf("%s %s %s %s\n", "curl", "-o", fn, url)
 	}
-	cmd := exec.Command("curl", "-o", fn, url)
+//	cmd := exec.Command("curl", "--silent", "--compress", "-o", fn, url)
+	cmd := exec.Command("curl", "--silent", "-o", fn, url)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
@@ -400,6 +401,10 @@ func fetch() {
 	if !noGrb2 && noRunDir && !refetch {
 		fmt.Printf("This complete model run exists in %s\n", grb2)
 		fmt.Printf("Use -refetch to fetch again\n")
+		nextFirst := zulu.Add(modelFrequency).Add(startLag).Local()
+		nextLast := forecastLast.Add(modelFrequency).Local()
+		fmt.Printf("The next model run first forecast should appear at %02d:%02d and be complete at %02d:%02d\n", nextFirst.Hour(), nextFirst.Minute(), nextLast.Hour(), nextLast.Minute())
+		forecastLast = zulu.Add(modelFrequency)
 		os.Exit(1)
 	}
 
@@ -470,7 +475,9 @@ func fetch() {
 		fn := runDir + "/" + urlfn
 
 		if (Z.model == "gfs") && (forecast > 240) && (forecast%12 != 0) {
-			fmt.Printf("Not forecast %s\n", urlfn)
+			if verbose {
+				fmt.Printf("Not forecast %s\n", urlfn)
+			}
 			hours += forecastFrequency
 			continue
 		}
