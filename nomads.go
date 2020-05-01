@@ -652,6 +652,8 @@ func fetch() {
 	zulu = first.Truncate(modelFrequency) // Model run Zulu time
 	forecastLast := zulu.Add(endLag)
 	inProgress = utc.Before(forecastLast)
+	var inProgressZulu time.Time
+	inProgressZulu = zulu
 
 	if inProgress && !partial {
 		// If the current run is in progress go back to the last complete run.
@@ -664,7 +666,7 @@ func fetch() {
 	log.Printf("Run: %s\n", run)
 	if inProgress {
 		local := forecastLast.Local()
-		log.Printf("Model run in progress. Last forecast should be available at %02d:%02d\n", local.Hour(), local.Minute())
+		log.Printf("%s %02dz run in progress - last should be complete at %02d:%02d\n", Z.model, inProgressZulu.Hour(), local.Hour(), local.Minute())
 	}
 
 	usr, err := user.Current()
