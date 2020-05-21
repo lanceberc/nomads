@@ -287,6 +287,15 @@ var zones = map[string]Zone{
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
 		modelVars:   []string{"APCP", "PRATE", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "REFC", "REFD", "MAXREF"},
 	},
+	"hamptonssub": Zone{
+		description: "Hamptons to Newport Wind hi-res (18 hour hrrr subhourly)",
+		geo:         "hamptons",
+		model:       "hrrr_sub",
+		longitude:   Longitude{-72.5, -71.0},
+		latitude:    Latitude{42.00, 40.00},
+		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere"},
+		modelVars:   []string{"PRATE", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "REFC", "REFD"},
+	},
 	"hamptonsnam": Zone{
 		description: "Hamptons to Newport NAM",
 		geo:         "hamptons",
