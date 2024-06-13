@@ -251,7 +251,7 @@ var zones = map[string]Zone{
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
 		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
 	},
-	"pacific-wave": Zone{
+	"epacific-wave": Zone{
 		description: "North Pacific Wave (10 day GFS)",
 		geo:         "pacific",
 		model:       "gfs-wave-epacif",
@@ -260,6 +260,26 @@ var zones = map[string]Zone{
 		modelLevels: []string{"all"},
 		modelVars:   []string{"all"},
 	},
+	"pacific-wave": Zone{
+		description: "Pacific Cup Wave (15 day GFS)",
+		geo:         "pacific",
+		model:       "gfs-wave-global",
+		longitude:   Longitude{-230, -100},
+		latitude:    Latitude{40, 15},
+		modelLevels: []string{"surface", "1_in_sequence", "2_in_sequence", "3_in_sequence" },
+		modelVars:   []string{"DIRPW", "HTSGW", "PERPW", "SWDIR", "SWELL", "SWPER", "WIND", "WVDIR", "WVHGT", "WVPER", },
+	},
+	"paccup": Zone{
+		description: "North-East Pacific Wind (10 day GFS)",
+		geo:         "paccup",
+		model:       "gfs",
+		longitude:   Longitude{-160, -115},
+		latitude:    Latitude{50, 15},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
+		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
+		//modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
+		//modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "GUST", "PRES"},
+	},
 	"paccup-wave": Zone{
 		description: "Pacific Cup Wave (15 day GFS)",
 		geo:         "paccup",
@@ -267,7 +287,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-160, -115},
 		latitude:    Latitude{40, 15},
 		modelLevels: []string{"surface", "1_in_sequence", "2_in_sequence", "3_in_sequence" },
-		modelVars:   []string{"DIRPW", "HTSGW", "PERPW", "SWDIR", "SWELL", "SWPER", "UGRD", "VGRD", "WDIR", "WIND", "WVDIR", "WVHGT", "WVPER", },
+		modelVars:   []string{"DIRPW", "HTSGW", "PERPW", "SWDIR", "SWELL", "SWPER", "WVDIR", "WVHGT", "WVPER", },
 	},
 	"ca-wave": Zone{
 		description: "Pacific Cup Wave (15 day GFS)",
@@ -319,15 +339,6 @@ var zones = map[string]Zone{
 		latitude:    Latitude{-30, -46},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
 		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC"},
-	},
-	"paccup": Zone{
-		description: "North-East Pacific Wind (10 day GFS)",
-		geo:         "paccup",
-		model:       "gfs",
-		longitude:   Longitude{-160, -115},
-		latitude:    Latitude{50, 15},
-		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "GUST", "PRES"},
 	},
 	"la": Zone{
 		description: "Los Angeles Wind hi-res (18 hour hrrr)",
