@@ -35,7 +35,7 @@ var zones = map[string]Zone{
 		// modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
 		// modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
 		modelLevels: []string{"mean_sea_level", "surface", "1_m_above_ground", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS", "MSLMA"},
 	},
 	"socal": Zone{
 		description: "SoCal Bay Wind hi-res (18 hour hrrr)",
@@ -46,7 +46,7 @@ var zones = map[string]Zone{
 		// modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
 		// modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "MSLMA"},
 	},
 	"socal+": Zone{
 		description: "SoCal Bay Wind hi-res (18 hour hrrr)",
@@ -57,7 +57,18 @@ var zones = map[string]Zone{
 		// modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
 		// modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS", "MSLMA"},
+	},
+	"socal36+": Zone{
+		description: "SoCal Bay Wind hi-res (18 hour hrrr)",
+		geo:         "socal",
+		model:       "hrrr36",
+		longitude:   Longitude{-120.5, -116.5},
+		latitude:    Latitude{34.5, 32.0},
+		// modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
+		// modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS", "MSLMA"},
 	},
 	"sf36": Zone{
 		description: "SF Bay Wind hi-res (36 hour hrrr, runs every 6 hours)",
@@ -66,7 +77,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-123, -122},
 		latitude:    Latitude{38, 37},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"sf36+": Zone{
 		description: "SF Bay Wind hi-res (36 hour hrrr, runs every 6 hours)",
@@ -75,7 +86,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-123, -122},
 		latitude:    Latitude{38, 37},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS", "MSLMA"},
 	},
 	"sfoffshore": Zone{
 		description: "SF Bay & Farallones Wind hi-res (18 hour hrrr)",
@@ -84,7 +95,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-131, -119},
 		latitude:    Latitude{41, 35},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"sfoffshore36": Zone{
 		description: "SF Bay & Farallones Wind hi-res (36 hour hrrr)",
@@ -93,7 +104,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-131, -119},
 		latitude:    Latitude{41, 35},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"sfsub": Zone{
 		description: "SF Bay Wind hi-res, 15m intervals (18 hour hrrr_sub)",
@@ -102,7 +113,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-123, -122},
 		latitude:    Latitude{38, 37},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground", "1000_m_above_ground", "4000_m_above_ground", "entire_atmosphere"},
-		modelVars:   []string{"PRATE", "APCP", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "DPT", "REFC", "REFD", },
+		modelVars:   []string{"PRATE", "APCP", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "DPT", "REFC", "REFD" },
 	},
 	"sfrcsub": Zone{
 		description: "SF Bay Wind hi-res, 15m intervals (18 hour hrrr_sub)",
@@ -111,7 +122,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-123.0, -122.0},
 		latitude:    Latitude{38.25, 37.5},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground", "1000_m_above_ground", "4000_m_above_ground", "entire_atmosphere"},
-		modelVars:   []string{"UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"norcal": Zone{
 		description: "Bay Area (incl Monterey Bay) all variables (18 hour hrrr)",
@@ -140,23 +151,24 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-124.5, -122},
 		latitude:    Latitude{38.5, 36.5},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST" },
+		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST", "MSLET", "CPOFP", "PRATE", "SRWEQ", "NCPCP", "CSNOW", "CICEP", "CFRZR", "CRAIN", "LFTX", "PWAT", "CAPE", "PRES", "WTMP", "APCP", "REFC", "REFD", "VIL" },
+		//modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST" },
 	},
 	"bosporushrrr": Zone{
 		description: "Wind for Bosporus (60 hour NAM)",
 		geo:         "bosporushrrr",
 		model:       "hrrr",
-		longitude:   Longitude{-121, -115},
-		latitude:    Latitude{36, 30},
+		longitude:   Longitude{-121, -111},
+		latitude:    Latitude{36, 25},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "500_mb", "300_mb"},
-		modelVars:   []string{"PRES", "WIND", "UGRD", "VGRD", "TMP", "GUST", "APCP", "PRATE", "REFC", "REFD", "MAXREF"},
+		modelVars:   []string{"PRES", "WIND", "UGRD", "VGRD", "TMP", "GUST", "APCP", "PRATE", "REFC", "REFD", "MAXREF", "MSLMA"},
 	},
 	"bosporusnam": Zone{
 		description: "Wind for Bosporus (60 hour NAM)",
 		geo:         "bosporusnam",
 		model:       "nam-nest",
-		longitude:   Longitude{-120, -110},
-		latitude:    Latitude{36, 30},
+		longitude:   Longitude{-121, -111},
+		latitude:    Latitude{36, 25},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
 		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST", "APCP", "PRATE" },
 	},
@@ -170,13 +182,22 @@ var zones = map[string]Zone{
 		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE"},
 	},
 	"socalnam": Zone{
-		description: "Outside SF Bay Wind (60 hour NAM)",
+		description: "SoCal NAM Wind (60 hour NAM)",
 		geo:         "socalnam",
 		model:       "nam-nest",
 		longitude:   Longitude{-120.5, -116.5},
 		latitude:    Latitude{34.5, 32.0},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
 		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST"},
+	},
+	"socalnam+": Zone{
+		description: "SoCal NAM w/ extras  (60 hour NAM)",
+		geo:         "socalnam",
+		model:       "nam-nest",
+		longitude:   Longitude{-120.5, -116.5},
+		latitude:    Latitude{34.5, 32.0},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "500_mb", "850_mb", "1000_mb"},
+		modelVars:   []string{"PRMSL", "MSLET", "PWAT", "UGRD", "VGRD", "TMP", "GUST", "PRATE", "REFC", "REFD", "MAXREF", "APCP", "SNOD", "WEASD", "SRWEQ", "CFRZR", "CICE", "CICEP", "CPOFP", "CRAIN", "CSNOW", "SNOD" },
 	},
 	"casnownam": Zone{
 		description: "California Coast and Mountains (60 hour NAM)",
@@ -203,7 +224,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-130.0, -116.0},
 		latitude:    Latitude{42.0, 32.5},
 		modelLevels: []string{"surface", "mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "LTNG" },
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "LTNG", "MSLMA" },
 	},
 	"cahrrr36": Zone{
 		description: "California Coast (36 hour HRRR)",
@@ -212,7 +233,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-130.0, -116.0},
 		latitude:    Latitude{42.0, 32.5},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"fire": Zone{
 		description: "SF North Bay fire (18 hour hrrr_sub)",
@@ -221,7 +242,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-123, -121},
 		latitude:    Latitude{39, 37},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"tahoe": Zone{
 		description: "Tahoe area (18 hour hrrr)",
@@ -230,7 +251,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-123, -119},
 		latitude:    Latitude{41, 36},
 		modelLevels: []string{"mean_sea_level", "surface", "1_m_above_ground", "2_m_above_ground", "10_m_above_ground", "250_mb", "500_mb", "700_mb", "850_mb", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"GUST", "APCP", "HGT", "RH", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "ASNOW", "CSNOW", "CRAIN", "CICEP", "CFRZR" },
+		modelVars:   []string{"GUST", "APCP", "HGT", "RH", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "ASNOW", "CSNOW", "CRAIN", "CICEP", "CFRZR", "MSLMA" },
 		//		modelVars:   []string{"GUST", "TMP", "UGRD", "VGRD", "WIND"},
 	},
 	"tahoenam": Zone{
@@ -242,6 +263,44 @@ var zones = map[string]Zone{
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
 		modelVars:   []string{"PRMSL", "MSLET", "PWAT", "UGRD", "VGRD", "TMP", "GUST", "PRATE", "REFC", "REFD", "MAXREF", "APCP", "SNOD", "WEASD", "SRWEQ", "CFRZR", "CICE", "CICEP", "CPOFP", "CRAIN", "CSNOW", "SNOD" },
 	},
+	"co": Zone{
+		description: "Colorado (18 hour hrrr)",
+		geo:         "co",
+		model:       "hrrr",
+		longitude:   Longitude{-109.0, -102.0},
+		latitude:    Latitude{41.0, 37.0},
+		modelLevels: []string{"mean_sea_level", "surface", "1_m_above_ground", "2_m_above_ground", "10_m_above_ground", "250_mb", "500_mb", "700_mb", "850_mb", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
+		modelVars:   []string{"GUST", "APCP", "HGT", "RH", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "ASNOW", "CSNOW", "CRAIN", "CICEP", "CFRZR", "MSLMA" },
+		//		modelVars:   []string{"GUST", "TMP", "UGRD", "VGRD", "WIND"},
+	},
+	"conam": Zone{
+		description: "Colorado (60 hour NAM)",
+		geo:         "co",
+		model:       "nam-nest",
+		longitude:   Longitude{-109.0, -102.0},
+		latitude:    Latitude{41.0, 37.0},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
+		modelVars:   []string{"PRMSL", "MSLET", "PWAT", "UGRD", "VGRD", "TMP", "GUST", "PRATE", "REFC", "REFD", "MAXREF", "APCP", "SNOD", "WEASD", "SRWEQ", "CFRZR", "CICE", "CICEP", "CPOFP", "CRAIN", "CSNOW", "SNOD" },
+	},
+	"hinam+": Zone{
+		description: "Outside SF Bay Wind (60 hour NAM)",
+		geo:         "hinam",
+		model:       "hi-nam-nest",
+		longitude:   Longitude{-161, -152},
+		latitude:    Latitude{25, 17},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
+		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST", "MSLET", "CPOFP", "PRATE", "SRWEQ", "NCPCP", "CSNOW", "CICEP", "CFRZR", "CRAIN", "LFTX", "PWAT", "CAPE", "PRES", "WTMP", "APCP", "REFC", "REFD", "VIL" },
+		//modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST" },
+	},
+	"hinam": Zone{
+		description: "Hawaii Approach NAM Nest (60 hour NAM)",
+		geo:         "hinam",
+		model:       "hi-nam-nest",
+		longitude:   Longitude{-158.25, -153.5},
+		latitude:    Latitude{23.25, 21},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
+		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "GUST", "MSLET", "PRES"},
+	},
 	"pacific": Zone{
 		description: "North Pacific Wind/Precip (10 day GFS)",
 		geo:         "pacific",
@@ -249,7 +308,8 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-230, -100},
 		latitude:    Latitude{70, 10},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
-		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
+		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD", "RH", "HCDC", "MCDC", "LCDC", "TCDC"},
+		//modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
 	},
 	"epacific-wave": Zone{
 		description: "North Pacific Wave (10 day GFS)",
@@ -267,7 +327,8 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-230, -100},
 		latitude:    Latitude{40, 15},
 		modelLevels: []string{"surface", "1_in_sequence", "2_in_sequence", "3_in_sequence" },
-		modelVars:   []string{"DIRPW", "HTSGW", "PERPW", "SWDIR", "SWELL", "SWPER", "WIND", "WVDIR", "WVHGT", "WVPER", },
+		//modelVars:   []string{"DIRPW", "HTSGW", "PERPW", "SWDIR", "SWELL", "SWPER", "WIND", "WVDIR", "WVHGT", "WVPER", },
+		modelVars:   []string{"DIRPW", "HTSGW", "PERPW", "SWDIR", "SWELL", "SWPER", "WVDIR", "WVHGT", "WVPER", },
 	},
 	"paccup": Zone{
 		description: "North-East Pacific Wind (10 day GFS)",
@@ -306,6 +367,16 @@ var zones = map[string]Zone{
 		latitude:    Latitude{25, 19},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
 		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR"},
+	},
+	"acgfs": Zone{
+		description: "AC37 (10 day GFS)",
+		geo:         "europe",
+		model:       "gfs",
+		longitude:   Longitude{-3, 7},
+		latitude:    Latitude{44, 38},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
+		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD", "RH", "HCDC", "MCDC", "LCDC", "TCDC"},
+		//modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
 	},
 	"wc-e5": Zone{
 		description: "West Coast Wind/Precip (0.5 degree 16 day GFS Ensemble)",
@@ -349,7 +420,7 @@ var zones = map[string]Zone{
 		// modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
 		// modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "MSLMA"},
 	},
 	"se": Zone{
 		description: "IOD Sweden Race Ares",
@@ -376,7 +447,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-118, -105},
 		latitude:    Latitude{48, 38},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "MSLMA"},
 	},
 	"colorado": Zone{
 		description: "Coloradoh",
@@ -385,7 +456,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-109, -102},
 		latitude:    Latitude{41, 37},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "MSLMA"},
 	},
 	"chessy": Zone{
 		description: "Annapolis Wind hi-res (18 hour hrrr)",
@@ -394,7 +465,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-77.0, -75.5},
 		latitude:    Latitude{39.75, 38.5},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"newport": Zone{
 		description: "Newport Wind hi-res (18 hour hrrr)",
@@ -403,7 +474,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-71.5, -71.0},
 		latitude:    Latitude{41.75, 41.25},
 		modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "MSLMA"},
 	},
 	"hamptons": Zone{
 		description: "Hamptons to Newport Wind hi-res (18 hour hrrr)",
@@ -412,7 +483,8 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-72.5, -71.0},
 		latitude:    Latitude{42.00, 40.00},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "PRATE", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "REFC", "REFD", "MAXREF"},
+		modelVars:   []string{"APCP", "CAPE", "CFRZR", "CICEP", "CRAIN", "CPOFP", "CRAIN", "CSNOW", "DPT", "PRATE", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "HAIL", "HGT", "HCDC", "LCDC", "MCDC", "LTNG", "REFC", "REFD", "MAXREF", "MSLMA", "PWAT", "RH", "TCDC", "VIS", "MSLMA"},
+		//modelVars:   []string{"APCP", "PRATE", "PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST", "REFC", "REFD", "MAXREF"},
 	},
 	"hamptonsnam": Zone{
 		description: "Hamptons to Newport NAM",
@@ -421,7 +493,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-72.5, -70.0},
 		latitude:    Latitude{42.50, 40.00},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
-		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST"},
+		modelVars:   []string{"APCP", "CAPE", "DPT", "LTNG", "MAXREF", "MAXRH", "MINRH", "MSLET", "NCPCP", "PRATE", "PRES", "PRMSL", "PWAT", "REFC", "REFD", "RH", "TMIN", "TMAX", "UGRD", "VGRD", "VIS", "USTM", "VSTM", "TMP", "GUST"},
 	},
 	"hamptonsgfs": Zone{
 		description: "New England GFS (10 day GFS)",
@@ -429,8 +501,10 @@ var zones = map[string]Zone{
 		model:       "gfs",
 		longitude:   Longitude{-90, -55},
 		latitude:    Latitude{50, 34},
-		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
-		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC"},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
+		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD", "RH", "HCDC", "MCDC", "LCDC", "TCDC"},
+		// modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
+		// modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC"},
 	},
 	"dorian": Zone{
 		description: "Dorian Wind hi-res (36 hour hrrr, runs every 6 hours)",
@@ -439,7 +513,7 @@ var zones = map[string]Zone{
 		longitude:   Longitude{-81, -76},
 		latitude:    Latitude{29, 25},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
-		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "MSLMA"},
 	},
 	"doriannam": Zone{
 		description: "Dorian NAM (60 hour NAM)",
@@ -449,6 +523,47 @@ var zones = map[string]Zone{
 		latitude:    Latitude{29, 25},
 		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
 		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "GUST", "APCP", "PWAT", "REFC"},
+	},
+	"sydneygfs": Zone{
+		description: "Sydney AU 10 day GFS",
+		geo:         "sydney",
+		model:       "gfs",
+		longitude:   Longitude{148, 163},
+		latitude:    Latitude{-25, -38},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
+		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD", "RH", "HCDC", "MCDC", "LCDC", "TCDC"},
+		//modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
+	},
+	"chihrrr": Zone{
+		description: "Chicago HRRR hi-res (18 hour hrrr)",
+		geo:         "chicago",
+		model:       "hrrr",
+		longitude:   Longitude{-96, -82},
+		latitude:    Latitude{45, 38},
+		// modelLevels: []string{"surface", "2_m_above_ground", "10_m_above_ground"},
+		// modelVars:   []string{"PRES", "UGRD", "VGRD", "TMP", "WIND", "GUST"},
+		modelLevels: []string{"mean_sea_level", "surface", "1_m_above_ground", "2_m_above_ground", "10_m_above_ground", "entire_atmosphere", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29"},
+		modelVars:   []string{"APCP", "GUST", "PRATE", "PRES", "PWAT", "TMP", "UGRD", "VGRD", "WIND", "REFC", "REFD", "MAXREF", "CAPE", "LFTX", "LTNG", "VIS", "MSLMA"},
+	},
+	"chinam": Zone{
+		description: "Chicago 60 hour NAM",
+		geo:         "chicago",
+		model:       "nam-nest",
+		longitude:   Longitude{-96, -82},
+		latitude:    Latitude{45, 38},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground"},
+		modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST", "MSLET", "CPOFP", "PRATE", "SRWEQ", "NCPCP", "CSNOW", "CICEP", "CFRZR", "CRAIN", "LFTX", "PWAT", "CAPE", "PRES", "WTMP", "APCP", "REFC", "REFD", "VIL" },
+		//modelVars:   []string{"PRMSL", "UGRD", "VGRD", "TMP", "GUST" },
+	},
+	"chigfs": Zone{
+		description: "Wind/Precip (10 day GFS)",
+		geo:         "chicago",
+		model:       "gfs",
+		longitude:   Longitude{-96, -82},
+		latitude:    Latitude{45, 38},
+		modelLevels: []string{"mean_sea_level", "surface", "2_m_above_ground", "10_m_above_ground", "300_mb", "500_mb", "850_mb", "entire_atmosphere_%5C%28considered_as_a_single_layer%5C%29", "entire_atmosphere"},
+		modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD", "RH", "HCDC", "MCDC", "LCDC", "TCDC"},
+		//modelVars:   []string{"PRMSL", "MSLET", "UGRD", "VGRD", "TMP", "ACPCP", "CPRAT", "APCP", "PWAT", "PRATE", "GUST", "HGT", "REFC", "CAPE", "CRAIN", "CSNOW", "CICEP", "CFRZR", "CPOFP", "GRLE", "ICMR", "WEASD"},
 	},
 }
 
@@ -471,8 +586,8 @@ var models = map[string]Model{
 		horizon:           "384h", // When is last forecast?
 		start:             "3.5h", // How long after run first forecast usually appears
 		end:               "5h",   // How long after run last forecast usually appears
-		// baseurl:           "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=%s%s%s&subregion=&leftlon=%5.2f&rightlon=%5.2f&toplat=%5.2f&bottomlat=%5.2f&dir=%%2Fgfs.%04d%02d%02d%%2F%02d",
-		baseurl:           "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=%s%s%s&subregion=&leftlon=%5.2f&rightlon=%5.2f&toplat=%5.2f&bottomlat=%5.2f&dir=%%2Fgfs.%04d%02d%02d%%2F%02d%%2Fatmos",
+		// baseurl:           "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=%s%s%s&subregion=&leftlon=%05.2f&rightlon=%05.2f&toplat=%05.2f&bottomlat=%05.2f&dir=%%2Fgfs.%04d%02d%02d%%2F%02d",
+		baseurl:           "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=%s%s%s&subregion=&leftlon=%05.2f&rightlon=%05.2f&toplat=%05.2f&bottomlat=%05.2f&dir=%%2Fgfs.%04d%02d%02d%%2F%02d%%2Fatmos",
 		baseurlfn:         "%s.t%02dz.pgrb2.0p25.f%03d",
 	},
 	"gfs-wave-global": {
@@ -580,12 +695,23 @@ var models = map[string]Model{
 		baseurl:           "https://nomads.ncep.noaa.gov/cgi-bin/filter_nam_conusnest.pl?file=%s%s%s&subregion=&leftlon=%5.2f&rightlon=%5.2f&toplat=%5.2f&bottomlat=%5.2f&dir=%%2Fnam.%04d%02d%02d",
 		baseurlfn:         "%s.t%02dz.conusnest.hiresf%02d.tm00.grib2",
 	},
+	"hi-nam-nest": {
+		fn:                "nam",
+		modelFrequency:    "6h",
+		forecastFrequency: "1h",
+		horizon:           "60h",
+		start:             "1.5h",
+		end:               "3h",
+//                                    https://nomads.ncep.noaa.gov/cgi-bin/filter_nam_hawaiinest.pl?dir=%2Fnam.20250118&file=nam.t00z.hawaiinest.hiresf00.tm00.grib2&all_var=on&all_lev=on
+		baseurl:           "https://nomads.ncep.noaa.gov/cgi-bin/filter_nam_hawaiinest.pl?file=%s%s%s&subregion=&leftlon=%5.2f&rightlon=%5.2f&toplat=%5.2f&bottomlat=%5.2f&dir=%%2Fnam.%04d%02d%02d",
+		baseurlfn:         "%s.t%02dz.hawaiinest.hiresf%02d.tm00.grib2",
+	},
 }
 
 var help bool
 var zone string
 var lastHorizon string
-var prev bool
+var prev int
 var partial bool
 var merge bool
 var refetch bool
@@ -820,9 +946,7 @@ func fetch() {
 	modelFrequency, _ := time.ParseDuration(M.modelFrequency)
 	forecastFrequency, _ := time.ParseDuration(M.forecastFrequency)
 	first := utc.Add(-startLag)
-	if prev {
-		first = first.Add(-modelFrequency)
-	}
+	first = first.Add(-modelFrequency * time.Duration(prev)) // weird construct casting prev (an int) to a duration
 	zulu = first.Truncate(modelFrequency) // Model run Zulu time
 	forecastLast := zulu.Add(endLag)
 	inProgress = utc.Before(forecastLast)
@@ -960,7 +1084,7 @@ func fetch() {
 	if badGribCount > 0 {
 		log.Printf("Could not fetch%s\n", badGribs)
 		log.Printf("Use --merge to fetch missing forecasts\n")
-		log.Printf("Use --prev for last complete model run\n")
+		log.Printf("Use --prev 1 for last complete model run\n")
 		if inProgress {
 			done := forecastLast.Local()
 			log.Printf("Model run in progress. All forecasts should be available by %02d:%02d\n", done.Hour(), done.Minute())
@@ -1035,7 +1159,7 @@ func Usage() {
 
 func args() {
 	//	args := os.Args[1:]
-	flag.BoolVar(&prev, "prev", false, "Fetch previous run")
+	flag.IntVar(&prev, "prev", 0, "Fetch Nth previous run")
 	flag.BoolVar(&partial, "partial", false, "Fetch current in-progress model (if any)")
 	flag.BoolVar(&merge, "merge", false, "Fetch missing forecasts")
 	flag.BoolVar(&refetch, "refetch", false, "Refetch all forecasts for this run")
