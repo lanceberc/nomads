@@ -967,9 +967,18 @@ func fetch() {
 		log.Printf("%s %02dz run in progress - last should be complete at %02d:%02d\n", Z.model, inProgressZulu.Hour(), local.Hour(), local.Minute())
 	}
 
-	usr, err := user.Current()
-	baseDir := usr.HomeDir + "/Downloads/gribs"
-	grb2Dir := baseDir + "/grb2"
+	baseDir := ""
+	grb2Dir := ""
+	expeditionDir := "C:\\ProgramData\\Expedition\\grib"
+	_, err := os.Stat(expeditionDir)
+	if err == nil {
+	  baseDir = expeditionDir
+	  grb2Dir = baseDir
+	} else {
+	  usr, _ := user.Current()
+	  baseDir = usr.HomeDir + "/Downloads/gribs"
+	  grb2Dir = baseDir + "/grb2"
+	}
 	runDir := grb2Dir + "/" + run
 	grb2 := grb2Dir + "/" + run + ".grb2"
 
